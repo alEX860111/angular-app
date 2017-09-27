@@ -1,0 +1,25 @@
+<md-toolbar color="primary">
+  <span fxHide.gt-xs><button md-icon-button (click)="toggleNavigation()">
+    <md-icon>menu</md-icon></button>
+  </span>
+  <img alt="Home" title="Home" src="/assets/angular.svg" class="toolbar-logo">
+  <span class="toolbar-title">Angular App</span>
+  <button fxHide.xs md-button routerLink="/home" routerLinkActive="toolbar-active">Home</button>
+  <button fxHide.xs md-button routerLink="/products" routerLinkActive="toolbar-active">Products</button>
+  <button fxHide.xs md-button routerLink="/settings" routerLinkActive="toolbar-active">Settings</button>
+  <span class="toolbar-spacer"></span>
+  <md-icon class="toolbar-user-icon" mdTooltip="logged in as '{{session.username}}'">account_circle</md-icon>
+  <button md-button (click)="logout()">Logout</button>
+</md-toolbar>
+<md-sidenav-container>
+  <md-sidenav #navigation mode="over">
+    <md-nav-list>
+      <a md-list-item routerLink="/home">Home</a>
+      <a md-list-item routerLink="/products">Products</a>
+      <a md-list-item routerLink="/settings">Settings</a>
+    </md-nav-list>
+  </md-sidenav>
+  <div class="app-content">
+    <ng-content></ng-content>
+  </div>
+</md-sidenav-container>

@@ -1,0 +1,5 @@
+<form (keyup.enter)="onSubmit()" [formGroup]="form" novalidate>
+  <div *ngFor="let element of elements" class="form-row">
+    <app-dynamic-form-element [element]="element" [form]="form"></app-dynamic-form-element>
+  </div>
+</form>

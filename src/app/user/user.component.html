@@ -1,0 +1,18 @@
+<md-card>
+  <md-card-header>
+    <md-card-title>{{session.username}}</md-card-title>
+    <md-card-subtitle>{{session.role}}</md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+    <p>
+      Logged in at: {{session.loginDate | date:'short'}}
+    </p>
+    <p>
+      Session expires in:
+      <app-timer [countDownDate]="session.expirationDate"></app-timer>
+    </p>
+  </md-card-content>
+  <md-card-actions>
+    <button md-button (click)="openChangePasswordDialog()">Change Password</button>
+  </md-card-actions>
+</md-card>

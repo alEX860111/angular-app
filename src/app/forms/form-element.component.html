@@ -1,0 +1,15 @@
+<div [formGroup]="form">
+  <div [ngSwitch]="element.controlType">
+
+    <md-input-container *ngSwitchCase="'Input'">
+      <input mdInput [id]="element.key" [formControlName]="element.key" [attr.type]="element.type" [placeholder]="element.label"
+        [required]="element.required" autocomplete="off">
+      <md-error *ngFor="let errorMessage of errorMessages">{{errorMessage}}</md-error>
+    </md-input-container>
+
+    <md-select *ngSwitchCase="'Select'" [id]="element.key" [formControlName]="element.key" [placeholder]="element.label" [required]="element.required">
+      <md-option *ngFor="let option of element.options" [value]="option.value">{{option.label}}</md-option>
+    </md-select>
+
+  </div>
+</div>

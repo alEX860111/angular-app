@@ -1,0 +1,24 @@
+@import '~@angular/material/theming';
+@import './/theme.scss';
+
+html, body, material-app, md-sidenav-container, .app-content {
+  margin: 0;
+  height: 100%;
+}
+
+body { 
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+md-dialog-actions {
+  display: flex !important;
+  justify-content: flex-end;
+}
+
+button:disabled {
+  cursor: not-allowed !important;
+}
+
+.alert-error {
+  background-color: mat-color($warn) !important;
+}

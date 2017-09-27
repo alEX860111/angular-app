@@ -1,0 +1,6 @@
+<app-navbar *ngIf="isLoggedIn; else withoutNavbarTemplate">
+  <router-outlet></router-outlet>
+</app-navbar>
+<ng-template #withoutNavbarTemplate>
+  <router-outlet></router-outlet>
+</ng-template>

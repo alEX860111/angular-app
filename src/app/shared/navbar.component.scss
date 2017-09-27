@@ -1,0 +1,21 @@
+@import '~@angular/material/theming';
+@import '../../theme.scss';
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+.toolbar-title {
+  margin: 0 10px;
+}
+.toolbar-logo {
+  height: 40px;
+}
+.toolbar-user-icon {
+  cursor: default;
+}
+.toolbar-active {
+  background-color: darken(mat-color($primary), 5%);
+}
+.app-content {
+  padding: 10px;
+}

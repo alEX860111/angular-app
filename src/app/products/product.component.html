@@ -1,0 +1,9 @@
+<h2 md-dialog-title>{{title}}</h2>
+<md-dialog-content>
+  <app-dynamic-form [elements]="elements" (submit)="onSubmit()"></app-dynamic-form>
+</md-dialog-content>
+
+<md-dialog-actions>
+  <button type="submit" md-button color="primary" [disabled]="!productForm.form.valid" (click)="onSubmit()">Submit</button>
+  <button md-button (click)="close()">Abort</button>
+</md-dialog-actions>
