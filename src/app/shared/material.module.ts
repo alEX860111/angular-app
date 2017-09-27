@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
 import {
-  MdListModule, MdCardModule, MdSidenavModule, MdIconModule, MdToolbarModule, MdButtonModule, MdDialogModule,
-  MdMenuModule, MdInputModule, MdSelectModule, MdOptionModule, MdTooltipModule, MdSnackBarModule,
-  MdPaginatorModule, MdTableModule, MdSortModule
+  MatListModule, MatCardModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatButtonModule, MatDialogModule,
+  MatMenuModule, MatInputModule, MatSelectModule, MatOptionModule, MatTooltipModule, MatSnackBarModule,
+  MatPaginatorModule, MatTableModule, MatSortModule
 } from '@angular/material';
 
 @NgModule({
-  imports: [MdListModule, MdCardModule, MdSidenavModule, MdIconModule, MdToolbarModule, MdButtonModule, MdDialogModule,
-    MdMenuModule, MdInputModule, MdSelectModule, MdOptionModule, MdTooltipModule, MdSnackBarModule,
-    MdPaginatorModule, MdTableModule, MdSortModule],
-  exports: [MdListModule, MdCardModule, MdSidenavModule, MdIconModule, MdToolbarModule, MdButtonModule, MdDialogModule,
-    MdMenuModule, MdInputModule, MdSelectModule, MdOptionModule, MdTooltipModule, MdSnackBarModule,
-    MdPaginatorModule, MdTableModule, MdSortModule]
+  imports: [MatListModule, MatCardModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatButtonModule, MatDialogModule,
+    MatMenuModule, MatInputModule, MatSelectModule, MatOptionModule, MatTooltipModule, MatSnackBarModule,
+    MatPaginatorModule, MatTableModule, MatSortModule],
+  exports: [MatListModule, MatCardModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatButtonModule, MatDialogModule,
+    MatMenuModule, MatInputModule, MatSelectModule, MatOptionModule, MatTooltipModule, MatSnackBarModule,
+    MatPaginatorModule, MatTableModule, MatSortModule]
 })
 export class MaterialModule { }
-
-

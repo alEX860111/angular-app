@@ -23,6 +23,12 @@ export class ProductService {
       .catch(error => this.handleError(error));
   }
 
+  getProduct(id: string): Observable<Product> {
+    return this.http.get(`${this.API_URL}/${id}`)
+    .map(res => res.json())
+    .catch(error => this.handleError(error));
+  }
+
   deleteProduct(id: string): Observable<string> {
     return this.http.delete(`${this.API_URL}/${id}`)
       .map(() => id)
@@ -39,13 +45,13 @@ export class ProductService {
       .catch(error => this.handleError(error));
   }
 
-  editProduct(product: Product): Observable<string> {
+  editProduct(product: Product): Observable<Product> {
     const headers: Headers = new Headers({
       'Content-Type': 'application/json'
     });
     const body = JSON.stringify(product);
     return this.http.put(`${this.API_URL}/${product._id}`, body, { headers: headers })
-      .map(() => product._id)
+      .map(() => product)
       .catch(error => this.handleError(error));
   }
 

@@ -1,21 +1,21 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 
-import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 
 import { DynamicFormsModule } from '../forms/forms.module';
-import { ProductComponent } from './product.component';
+import { ProductDialogComponent } from './product-dialog.component';
 import { Product } from './product';
 
-describe('ProductDataComponent', function () {
+describe('ProductDialogComponent', function () {
 
-  let mdDialogRefMock;
+  let matDialogRefMock;
 
-  let component: ProductComponent;
+  let component: ProductDialogComponent;
 
-  let fixture: ComponentFixture<ProductComponent>;
+  let fixture: ComponentFixture<ProductDialogComponent>;
 
   let product: Product;
 
@@ -24,16 +24,16 @@ describe('ProductDataComponent', function () {
   });
 
   beforeEach(async(() => {
-    mdDialogRefMock = jasmine.createSpyObj('mdDialogRefMock', ['close']);
+    matDialogRefMock = jasmine.createSpyObj('matDialogRefMock', ['close']);
     const data = { product: product };
 
     TestBed.configureTestingModule({
       imports: [DynamicFormsModule, NoopAnimationsModule],
-      declarations: [ProductComponent],
-      providers: [{ provide: MdDialogRef, useValue: mdDialogRefMock },
-      {provide: MD_DIALOG_DATA , useValue: data}]
+      declarations: [ProductDialogComponent],
+      providers: [{ provide: MatDialogRef, useValue: matDialogRefMock },
+      {provide: MAT_DIALOG_DATA , useValue: data}, { provide: MATERIAL_COMPATIBILITY_MODE, useValue: true }]
     }).compileComponents().then(() => {
-      fixture = TestBed.createComponent(ProductComponent);
+      fixture = TestBed.createComponent(ProductDialogComponent);
       component = fixture.componentInstance;
     });
   }));
@@ -44,13 +44,13 @@ describe('ProductDataComponent', function () {
 
   it('submit should close the dialog with the submitted product', () => {
     fixture.detectChanges();
-    component.onSubmit();
-    expect(mdDialogRefMock.close).toHaveBeenCalledWith(product);
+    component.onSubmit(product);
+    expect(matDialogRefMock.close).toHaveBeenCalledWith(product);
   });
 
   it('close should close the dialog', () => {
     component.close();
-    expect(mdDialogRefMock.close).toHaveBeenCalled();
+    expect(matDialogRefMock.close).toHaveBeenCalled();
   });
 
 });

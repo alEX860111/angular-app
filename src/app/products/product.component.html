@@ -1,9 +1,7 @@
-<h2 md-dialog-title>{{title}}</h2>
-<md-dialog-content>
-  <app-dynamic-form [elements]="elements" (submit)="onSubmit()"></app-dynamic-form>
-</md-dialog-content>
-
-<md-dialog-actions>
-  <button type="submit" md-button color="primary" [disabled]="!productForm.form.valid" (click)="onSubmit()">Submit</button>
-  <button md-button (click)="close()">Abort</button>
-</md-dialog-actions>
+<mat-card *ngIf="product$ | async as product">
+    <mat-card-title>{{product.name}}</mat-card-title>
+    <mat-card-content>
+        <img md-card-image src="assets/angular.svg" alt="pic"> {{product.price | currency}}
+    </mat-card-content>
+</mat-card>
+<button mat-button routerLink="/products">Back</button>

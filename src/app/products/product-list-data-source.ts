@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
-import { MdPaginator, MdSort } from '@angular/material';
+import { MatPaginator, MatSort } from '@angular/material';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -15,9 +15,9 @@ export class ProductListDataSource extends DataSource<Row> {
 
   constructor(
     private productService: ProductService,
-    private paginator: MdPaginator,
+    private paginator: MatPaginator,
     private updateEmitter: EventEmitter<any>,
-    private sort: MdSort,
+    private sort: MatSort,
     private alertService: AlertService) {
     super();
   }

@@ -10,11 +10,6 @@ body {
   font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 
-md-dialog-actions {
-  display: flex !important;
-  justify-content: flex-end;
-}
-
 button:disabled {
   cursor: not-allowed !important;
 }

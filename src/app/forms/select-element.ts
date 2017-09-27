@@ -2,8 +2,8 @@ import { FormElement } from './form-element';
 import { ValidatorFn } from '@angular/forms';
 
 interface Option {
-  value: string,
-  label: string
+  value: string;
+  label: string;
 }
 
 export class SelectElement implements FormElement<string> {

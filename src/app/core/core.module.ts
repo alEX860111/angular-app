@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { AlertService } from './alert.service';
 import { AuthenticationGuard } from './authentication-guard';
-import { AuthenticationService } from './authentication.service';
+
 import { LogService } from './log.service';
 import { jwtHelperFactory } from './jwt-helper-factory';
 import { authHttpServiceFactory } from './auth-http-service-factory';
@@ -24,7 +24,6 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        AuthenticationService,
         AuthenticationGuard,
         AlertService,
         LogService,

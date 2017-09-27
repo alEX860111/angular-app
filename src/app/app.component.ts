@@ -7,18 +7,7 @@ import './rxjs-operators';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-
-  public isLoggedIn = false;
-
-  constructor(private router: Router) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.isLoggedIn = event.url !== '/login';
-      }
-    });
-  }
-
-}
+export class AppComponent { }

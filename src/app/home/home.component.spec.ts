@@ -1,11 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SharedModule } from '../shared/shared.module';
+import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 
 import { HomeComponent } from './home.component';
 import { MessageService } from './message.service';
 
-describe('MessageComponent', function () {
+describe('HomeComponent', function () {
 
   const TEST_MESSAGE = 'test';
 
@@ -26,7 +27,7 @@ describe('MessageComponent', function () {
     serviceMock = spy;
     TestBed.overrideComponent(HomeComponent, {
       set: {
-        providers: [{ provide: MessageService, useValue: serviceMock }]
+        providers: [{ provide: MessageService, useValue: serviceMock }, { provide: MATERIAL_COMPATIBILITY_MODE, useValue: true }]
       }
     });
   });

@@ -80,8 +80,8 @@ describe('ProductService', function () {
     const productToEdit = new Product();
     productToEdit._id = '123abc';
 
-    productService.editProduct(productToEdit).subscribe(id => {
-      expect(id).toBe(productToEdit._id);
+    productService.editProduct(productToEdit).subscribe(editedProduct => {
+      expect(editedProduct).toBe(productToEdit);
     }, fail);
 
     const args = http.put.calls.argsFor(0);

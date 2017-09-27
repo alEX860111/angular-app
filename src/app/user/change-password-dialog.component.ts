@@ -1,11 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 
 import { FormElement } from '../forms/form-element';
 import { TextElement, TextElementType } from '../forms/text-element';
-import { SelectElement } from '../forms/select-element';
-import { DynamicFormComponent } from '../forms/dynamic-form.component';
 
 import { ChangePasswordRequest } from './change-password-request';
 
@@ -15,11 +13,9 @@ import { ChangePasswordRequest } from './change-password-request';
 })
 export class ChangePasswordDialogComponent implements OnInit {
 
-  @ViewChild(DynamicFormComponent) changePasswordForm: DynamicFormComponent;
-
   public elements: FormElement<any>[];
 
-  constructor(private dialogRef: MdDialogRef<ChangePasswordDialogComponent>) { }
+  constructor(private dialogRef: MatDialogRef<ChangePasswordDialogComponent>) { }
 
   ngOnInit() {
     this.elements = [
@@ -56,10 +52,10 @@ export class ChangePasswordDialogComponent implements OnInit {
     ];
   }
 
-  onSubmit() {
+  onSubmit(value) {
     const changePasswordRequest: ChangePasswordRequest = {
-      oldPassword: this.changePasswordForm.form.value.password,
-      newPassword: this.changePasswordForm.form.value.newPassword
+      oldPassword: value.password,
+      newPassword: value.newPassword
     };
     this.dialogRef.close(changePasswordRequest);
   }

@@ -1,10 +1,12 @@
 import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 
-import { MdDialog, MdDialogConfig, MdDialogRef, PageEvent, MdPaginator, MdSort } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef, PageEvent, MatPaginator, MatSort } from '@angular/material';
+
+import { EmptyObservable } from 'rxjs/Observable/EmptyObservable';
 
 import { Product } from './product';
 import { ItemContainer } from './item-container';
-import { ProductComponent } from './product.component';
+import { ProductDialogComponent } from './product-dialog.component';
 import { ProductService } from './product.service';
 import { ProductListDataSource } from './product-list-data-source';
 import { SessionService } from '../core/session.service';
@@ -20,9 +22,9 @@ import { AlertService } from '../core/alert.service';
 })
 export class ProductListComponent implements OnInit {
 
-  @ViewChild(MdPaginator) paginator: MdPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  @ViewChild(MdSort) private sort: MdSort;
+  @ViewChild(MatSort) private sort: MatSort;
 
   private updateEmitter: EventEmitter<any>;
 
@@ -35,7 +37,7 @@ export class ProductListComponent implements OnInit {
   constructor(
     private sessionService: SessionService,
     private productService: ProductService,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private alertService: AlertService) { }
 
   ngOnInit() {
@@ -52,66 +54,55 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct(product: Product) {
-    const dialogRef: MdDialogRef<ConfirmationDialogComponent> = this.dialog.open(ConfirmationDialogComponent);
-    dialogRef.componentInstance.title = `Delete product '${product.name}'?`;
+    const config = new MatDialogConfig();
+    config.data = { title: `Delete product '${product.name}'?` };
 
-    dialogRef.afterClosed().subscribe(confirmed => {
-      if (!confirmed) {
-        return;
-      }
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, config);
 
-      this.productService.deleteProduct(product._id).subscribe(
-        () => {
-          this.alertService.alertSuccess(`Successfully deleted product '${product.name}'.`);
-          this.updateEmitter.emit();
-        },
-        () => this.alertService.alertError('Failed to delete product.')
+    dialogRef.afterClosed().flatMap(confirmed => {
+      return confirmed ? this.productService.deleteProduct(product._id) : new EmptyObservable<string>();
+    }).subscribe(
+      () => {
+        this.alertService.alertSuccess(`Successfully deleted product '${product.name}'.`);
+        this.updateEmitter.emit();
+      },
+      () => this.alertService.alertError('Failed to delete product.')
       );
-    });
   }
 
   addProduct() {
-    const config: MdDialogConfig = new MdDialogConfig();
+    const config = new MatDialogConfig();
     config.data = { product: new Product, title: 'Add Product' };
 
-    const dialogRef: MdDialogRef<ProductComponent> = this.dialog.open(ProductComponent, config);
+    const dialogRef = this.dialog.open(ProductDialogComponent, config);
 
-    dialogRef.afterClosed().subscribe(submittedProduct => {
-      if (!submittedProduct) {
-        return;
-      }
-
-      this.productService.addProduct(submittedProduct).subscribe(
-        (addedProduct) => {
-          this.alertService.alertSuccess(`Successfully added product '${addedProduct.name}'.`);
-          this.paginator.pageIndex = 0;
-          this.updateEmitter.emit();
-        },
-        () => this.alertService.alertError('Failed to add product.')
+    dialogRef.afterClosed().flatMap(submittedProduct => {
+      return submittedProduct ? this.productService.addProduct(submittedProduct) : new EmptyObservable<Product>();
+    }).subscribe(
+      (addedProduct) => {
+        this.alertService.alertSuccess(`Successfully added product '${addedProduct.name}'.`);
+        this.paginator.pageIndex = 0;
+        this.updateEmitter.emit();
+      },
+      () => this.alertService.alertError('Failed to add product.')
       );
-
-    });
   }
 
   editProduct(product: Product) {
-    const config: MdDialogConfig = new MdDialogConfig();
+    const config = new MatDialogConfig();
     config.data = { product: Object.assign({}, product), title: 'Edit Product' };
 
-    const dialogRef: MdDialogRef<ProductComponent> = this.dialog.open(ProductComponent, config);
+    const dialogRef = this.dialog.open(ProductDialogComponent, config);
 
-    dialogRef.afterClosed().subscribe(submittedProduct => {
-      if (!submittedProduct) {
-        return;
-      }
-
-      this.productService.editProduct(submittedProduct).subscribe(
-        () => {
-          this.alertService.alertSuccess(`Successfully updated product '${submittedProduct.name}'.`);
-          this.updateEmitter.emit();
-        },
-        () => this.alertService.alertError(`Failed to update product.`)
+    dialogRef.afterClosed().flatMap(submittedProduct => {
+      return submittedProduct ? this.productService.editProduct(submittedProduct) : new EmptyObservable<Product>();
+    }).subscribe(
+      (editedProduct) => {
+        this.alertService.alertSuccess(`Successfully updated product '${editedProduct.name}'.`);
+        this.updateEmitter.emit();
+      },
+      () => this.alertService.alertError(`Failed to update product.`)
       );
-    });
   }
 
 }

@@ -3,38 +3,30 @@ import { Http, Headers } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
-import { AuthenticationRequest } from './authentication-request';
-import { Session } from './session';
-import { SessionService } from './session.service';
+import { LoginRequest } from './login-request';
+import { Session } from '../core/session';
+import { SessionService } from '../core/session.service';
 import { LogService } from '../core/log.service';
 
 @Injectable()
-export class AuthenticationService {
+export class LoginService {
 
   private API_URL = 'http://localhost:8080/login';
-
-  private redirectUrl;
 
   constructor(
     private http: Http,
     private sessionService: SessionService,
-    private logService: LogService) {
-    this.redirectUrl = '/home';
+    private logService: LogService) { }
+
+  isLoggedIn() {
+    return this.sessionService.getSession() != null;
   }
 
-  setRedirectUrl(redirectUrl: string) {
-    this.redirectUrl = redirectUrl;
-  }
-
-  getRedirectUrl() {
-    return this.redirectUrl;
-  }
-
-  authenticate(authenticationRequest: AuthenticationRequest): Observable<Session> {
-    const headers: Headers = new Headers({
+  login(loginRequest: LoginRequest): Observable<Session> {
+    const headers = new Headers({
       'Content-Type': 'application/json'
     });
-    const body = JSON.stringify(authenticationRequest);
+    const body = JSON.stringify(loginRequest);
     return this.http.post(this.API_URL, body, { headers: headers })
       .map(res => this.sessionService.createSession(res.json().token))
       .catch(error => this.handleError(error));

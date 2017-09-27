@@ -14,7 +14,11 @@ export class DynamicFormComponent implements OnInit {
 
   @Input() elements: FormElement<any>[] = [];
 
-  @Output() submit = new EventEmitter();
+  @Input() showAbort = false;
+
+  @Output() submitForm = new EventEmitter<any>();
+
+  @Output() abortForm = new EventEmitter();
 
   form: FormGroup;
 
@@ -25,9 +29,11 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      this.submit.emit();
-    }
+    this.submitForm.emit(this.form.value);
+  }
+
+  onAbort() {
+    this.abortForm.emit();
   }
 
 }

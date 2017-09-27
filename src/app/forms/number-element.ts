@@ -11,7 +11,7 @@ export class NumberElement implements FormElement<number> {
   required = false;
   validators: ValidatorFn[] = [];
 
-  type = 'number'
+  type = 'number';
 
   constructor(key: string) {
     this.key = key;

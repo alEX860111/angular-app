@@ -1,6 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-
-import { MdSidenav } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 
@@ -15,8 +13,6 @@ import { AlertService } from '../core/alert.service';
 })
 export class NavbarComponent implements OnInit {
 
-  @ViewChild(MdSidenav) navigation: MdSidenav;
-
   public session: Session;
 
   constructor(
@@ -26,17 +22,18 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.session = this.sessionService.getSession();
+    this.sessionService.onCreateSession((session) => {
+      this.session = session;
+    });
+    this.sessionService.onDestroySession(() => {
+      this.session = null;
+    });
   }
 
   public logout() {
-    this.navigation.close();
     this.sessionService.destroySession();
     this.router.navigate(['/login']);
     this.alertService.alertSuccess('Successfully logged out.');
-  }
-
-  public toggleNavigation() {
-    this.navigation.opened ? this.navigation.close() : this.navigation.open();
   }
 
 }

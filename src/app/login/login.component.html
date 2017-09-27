@@ -1,17 +1,14 @@
 <div fxLayout="row" fxLayoutAlign="space-around center">
   <div>
-    <md-card class="login">
-      <md-card-header>
-        <img md-card-avatar alt="Home" title="Home" src="/assets/angular.svg">
-        <md-card-title>Angular App</md-card-title>
-        <md-card-subtitle>Login</md-card-subtitle>
-      </md-card-header>
-      <md-card-content>
-        <app-dynamic-form [elements]="elements" (submit)="onSubmit()"></app-dynamic-form>
-      </md-card-content>
-      <md-card-actions class="login-actions">
-        <button md-button color="primary" [disabled]="!loginForm.form.valid" (click)="onSubmit()">Submit</button>
-      </md-card-actions>
-    </md-card>
+    <mat-card class="login">
+      <mat-card-header>
+        <img mat-card-avatar alt="Home" title="Home" src="/assets/angular.svg">
+        <mat-card-title>Angular App</mat-card-title>
+        <mat-card-subtitle>Login</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <app-dynamic-form [elements]="elements" (submitForm)="onSubmit($event)"></app-dynamic-form>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

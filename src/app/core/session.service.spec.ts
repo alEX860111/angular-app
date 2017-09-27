@@ -23,6 +23,8 @@ describe('SessionService', () => {
 
       const decodedToken = { username: 'zoe', userId: '42xy', role: 'user', more: 'info', iat: 0 };
       jwtHelperMock.decodeToken.and.returnValue(decodedToken);
+      const expirationDate = new Date(Date.now() * 10);
+      jwtHelperMock.getTokenExpirationDate.and.returnValue(expirationDate);
 
       const session = sessionService.getSession();
 
@@ -30,7 +32,7 @@ describe('SessionService', () => {
       expectedSession.username = 'zoe';
       expectedSession.userId = '42xy';
       expectedSession.role = 'user';
-      expectedSession.expirationDate = undefined;
+      expectedSession.expirationDate = expirationDate;
       expectedSession.loginDate = new Date(0);
 
       expect(session).toEqual(expectedSession);
@@ -64,6 +66,8 @@ describe('SessionService', () => {
 
     const decodedToken = { username: 'zoe', userId: '42xy', role: 'user', more: 'info', iat: 0 };
     jwtHelperMock.decodeToken.and.returnValue(decodedToken);
+    const expirationDate = new Date(Date.now() * 10);
+    jwtHelperMock.getTokenExpirationDate.and.returnValue(expirationDate);
 
     const session: Session = sessionService.createSession(token);
 
@@ -73,31 +77,9 @@ describe('SessionService', () => {
     expectedSession.username = 'zoe';
     expectedSession.userId = '42xy';
     expectedSession.role = 'user';
-    expectedSession.expirationDate = undefined;
+    expectedSession.expirationDate = expirationDate;
     expectedSession.loginDate = new Date(0);
     expect(session).toEqual(expectedSession);
-  });
-
-  describe('isSessionExpired', () => {
-
-    it('should return false if session is not expired', () => {
-      const session = new Session();
-      session.expirationDate = new Date(Date.now() * 10);
-
-      const result = sessionService.isSessionExpired(session);
-
-      expect(result).toBe(false);
-    });
-
-    it('should return true if session is expired', () => {
-      const session = new Session();
-      session.expirationDate = new Date(0);
-
-      const result = sessionService.isSessionExpired(session);
-
-      expect(result).toBe(true);
-    });
-
   });
 
 });

@@ -16,7 +16,7 @@ export class TextElement implements FormElement<string> {
   required = false;
   validators: ValidatorFn[] = [];
 
-  type = 'text'
+  type = 'text';
 
   constructor(key: string) {
     this.key = key;

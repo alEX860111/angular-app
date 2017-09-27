@@ -1,53 +1,29 @@
-import { Component, Inject, ViewChild, OnInit } from '@angular/core';
-import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
+import 'rxjs/add/operator/switchMap';
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+
+import { Observable } from 'rxjs/Observable';
 
 import { Product } from './product';
+import { ProductService } from './product.service';
 
-import { DynamicFormComponent } from '../forms/dynamic-form.component';
-import { FormElement } from '../forms/form-element';
-import { TextElement, TextElementType } from '../forms/text-element';
-import { NumberElement } from '../forms/number-element';
 
 @Component({
   selector: 'app-product',
-  templateUrl: './product.component.html'
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
 
-  @ViewChild(DynamicFormComponent) productForm: DynamicFormComponent;
+  product$: Observable<Product>;
 
-  public elements: FormElement<any>[];
-
-  public title: string;
-
-  private product: Product;
-
-  constructor(public dialogRef: MdDialogRef<ProductComponent>, @Inject(MD_DIALOG_DATA) private data: any) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService) { }
 
   ngOnInit() {
-    this.title = this.data.title;
-    this.product = this.data.product;
-    this.elements = [
-      new TextElement('name')
-        .withLabel('Name')
-        .withRequired()
-        .withType(TextElementType.text)
-        .withValue(this.product.name),
-      new NumberElement('price')
-        .withLabel('Price')
-        .withRequired()
-        .withValue(this.product.price)
-    ];
-  }
-
-  onSubmit() {
-    this.product.name = this.productForm.form.value.name;
-    this.product.price = this.productForm.form.value.price;
-    this.dialogRef.close(this.product);
-  }
-
-  close() {
-    this.dialogRef.close();
+    this.product$ = this.route.paramMap
+      .switchMap((params: ParamMap) =>
+        this.productService.getProduct(params.get('id')));
   }
 
 }

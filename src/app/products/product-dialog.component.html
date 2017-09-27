@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Change Password</h2>
+<h2 mat-dialog-title>{{title}}</h2>
 <mat-dialog-content>
   <app-dynamic-form [elements]="elements" [showAbort]="true" (submitForm)="onSubmit($event)" (abortForm)="close()"></app-dynamic-form>
 </mat-dialog-content>

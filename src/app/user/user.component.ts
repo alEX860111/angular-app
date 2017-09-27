@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { ChangePasswordDialogComponent } from './change-password-dialog.component';
 import { ChangePasswordRequest } from './change-password-request';
@@ -22,7 +22,7 @@ export class UserComponent implements OnInit {
 
   constructor(
     private sessionService: SessionService,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private userService: UserService,
     private alertService: AlertService) { }
 

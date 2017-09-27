@@ -1,39 +1,40 @@
-<md-card>
-  <md-card-content>
-    <md-table #table [dataSource]="dataSource" mdSort>
+<mat-card>
+  <mat-card-content>
+    <mat-table #table [dataSource]="dataSource" matSort>
 
       <ng-container cdkColumnDef="index">
-        <md-header-cell *cdkHeaderCellDef>#</md-header-cell>
-        <md-cell *cdkCellDef="let row"><small>{{row.index | number : '2.0-0'}}</small></md-cell>
+        <mat-header-cell *cdkHeaderCellDef>#</mat-header-cell>
+        <mat-cell *cdkCellDef="let row"><small>{{row.index | number : '2.0-0'}}</small></mat-cell>
       </ng-container>
 
       <ng-container cdkColumnDef="name">
-        <md-header-cell *cdkHeaderCellDef md-sort-header disableClear="true">Name</md-header-cell>
-        <md-cell *cdkCellDef="let row">{{row.product.name}}</md-cell>
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header disableClear="true">Name</mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.product.name}}</mat-cell>
       </ng-container>
 
       <ng-container cdkColumnDef="createdAt">
-        <md-header-cell *cdkHeaderCellDef md-sort-header disableClear="true">Created At</md-header-cell>
-        <md-cell *cdkCellDef="let row">{{row.product.createdAt | date:'short'}}</md-cell>
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header disableClear="true">Created At</mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.product.createdAt | date:'short'}}</mat-cell>
       </ng-container>
 
       <ng-container cdkColumnDef="price">
-        <md-header-cell *cdkHeaderCellDef md-sort-header disableClear="true">Price</md-header-cell>
-        <md-cell *cdkCellDef="let row">{{row.product.price | currency}}</md-cell>
+        <mat-header-cell *cdkHeaderCellDef mat-sort-header disableClear="true">Price</mat-header-cell>
+        <mat-cell *cdkCellDef="let row">{{row.product.price | currency}}</mat-cell>
       </ng-container>
 
       <ng-container cdkColumnDef="actions">
-        <md-header-cell *cdkHeaderCellDef></md-header-cell>
-        <md-cell *cdkCellDef="let row" class="text-right">
-          <button md-icon-button (click)="editProduct(row.product)" mdTooltip="Edit product" mdTooltipPosition="above"><md-icon>create</md-icon></button>
-          <button md-icon-button (click)="deleteProduct(row.product)" mdTooltip="Delete product" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
-        </md-cell>
+        <mat-header-cell *cdkHeaderCellDef></mat-header-cell>
+        <mat-cell *cdkCellDef="let row" class="text-right">
+          <button mat-icon-button [routerLink]="['/products', row.product._id]" matTooltip="Open product" matTooltipPosition="above"><mat-icon>pageview</mat-icon></button>
+          <button mat-icon-button (click)="editProduct(row.product)" matTooltip="Edit product" matTooltipPosition="above"><mat-icon>create</mat-icon></button>
+          <button mat-icon-button (click)="deleteProduct(row.product)" matTooltip="Delete product" matTooltipPosition="above"><mat-icon>delete</mat-icon></button>
+        </mat-cell>
       </ng-container>
 
-      <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
-      <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
-    </md-table>
-    <md-paginator #paginator [length]="dataSource.productCount" [pageSize]="5" [pageSizeOptions]="[5, 10, 25]"></md-paginator>
-    <button *ngIf="session.isAdmin()" md-raised-button color="primary" (click)="addProduct()"><md-icon>add</md-icon> Add Product</button>
-  </md-card-content>
-</md-card>
+      <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator [length]="dataSource.productCount" [pageSize]="5" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+    <button *ngIf="session.isAdmin()" mat-raised-button color="primary" (click)="addProduct()"><mat-icon>add</mat-icon> Add Product</button>
+  </mat-card-content>
+</mat-card>
