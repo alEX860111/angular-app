@@ -42,7 +42,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.session = this.sessionService.getSession();
-    this.displayedColumns = ['index', 'name', 'price', 'createdAt'];
+    this.displayedColumns = ['index', 'image', 'name', 'price', 'createdAt'];
     if (this.session.isAdmin()) {
       this.displayedColumns.push('actions');
     }

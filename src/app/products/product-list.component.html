@@ -4,12 +4,23 @@
 
       <ng-container cdkColumnDef="index">
         <mat-header-cell *cdkHeaderCellDef>#</mat-header-cell>
-        <mat-cell *cdkCellDef="let row"><small>{{row.index | number : '2.0-0'}}</small></mat-cell>
+        <mat-cell *cdkCellDef="let row">
+          <small>{{row.index | number : '2.0-0'}}</small>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="image">
+        <mat-header-cell *cdkHeaderCellDef></mat-header-cell>
+        <mat-cell *cdkCellDef="let row">
+          <img class="image" [src]="row.product.image.path" [title]="row.product.name">
+        </mat-cell>
       </ng-container>
 
       <ng-container cdkColumnDef="name">
         <mat-header-cell *cdkHeaderCellDef mat-sort-header disableClear="true">Name</mat-header-cell>
-        <mat-cell *cdkCellDef="let row">{{row.product.name}}</mat-cell>
+        <mat-cell *cdkCellDef="let row">
+          {{row.product.name}}
+        </mat-cell>
       </ng-container>
 
       <ng-container cdkColumnDef="createdAt">

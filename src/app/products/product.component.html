@@ -1,7 +1,7 @@
 <mat-card *ngIf="product$ | async as product">
     <mat-card-title>{{product.name}}</mat-card-title>
-    <mat-card-content>
-        <img md-card-image [src]="product.image.path" alt="pic"> {{product.price | currency}}
-    </mat-card-content>
+    <mat-card-subtitle>{{product.price | currency}}</mat-card-subtitle>
+    <img md-card-image [src]="product.image.path" [title]="product.name">
+    
 </mat-card>
 <button mat-button routerLink="/products">Back</button>
