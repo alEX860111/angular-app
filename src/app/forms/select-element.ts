@@ -6,48 +6,20 @@ interface Option {
   label: string;
 }
 
-export class SelectElement implements FormElement<string> {
-
-  key: string;
-
-  label = '';
-  value = '';
-  required = false;
-  validators: ValidatorFn[] = [];
+export class SelectElement extends FormElement<string> {
 
   options: Option[] = [];
 
-  constructor(key: string) {
-    this.key = key;
-  }
-
-  get controlType() {
-    return 'Select';
-  }
-
-  withLabel(label: string) {
-    this.label = label;
-    return this;
-  }
-
-  withValue(value: string) {
-    this.value = value;
-    return this;
-  }
-
-  withRequired() {
-    this.required = true;
-    return this;
-  }
-
-  withValidators(validators: ValidatorFn[]) {
-    this.validators = validators;
-    return this;
-  }
-
-  withOptions(options: Option[]) {
-    this.options = options;
-    return this;
+  constructor(config: {
+    key: string,
+    label?: string;
+    value?: string;
+    required?: boolean;
+    validators?: ValidatorFn[],
+    options: Option[]
+  }) {
+    super(Object.assign({ controlType: 'Select', value: ''}, config));
+    this.options = config.options;
   }
 
 }

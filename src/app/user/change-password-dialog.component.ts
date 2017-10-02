@@ -19,15 +19,18 @@ export class ChangePasswordDialogComponent implements OnInit {
 
   ngOnInit() {
     this.elements = [
-      new TextElement('password')
-        .withLabel('Password')
-        .withRequired()
-        .withType(TextElementType.password),
-      new TextElement('newPassword')
-        .withLabel('New Password')
-        .withRequired()
-        .withType(TextElementType.password)
-        .withValidators([(control: AbstractControl): { [key: string]: any } => {
+      new TextElement({
+        key: 'password',
+        label: 'Password',
+        required: true,
+        type: TextElementType.password
+      }),
+      new TextElement({
+        key: 'newPassword',
+        label: 'New Password',
+        required: true,
+        type: TextElementType.password,
+        validators: [(control: AbstractControl): { [key: string]: any } => {
           if (!control.parent) {
             return null;
           }
@@ -35,12 +38,14 @@ export class ChangePasswordDialogComponent implements OnInit {
           if (confirmedNewPassword) {
             confirmedNewPassword.updateValueAndValidity();
           }
-        }]),
-      new TextElement('confirmedNewPassword')
-        .withLabel('Confirm New Password')
-        .withRequired()
-        .withType(TextElementType.password)
-        .withValidators([(control: AbstractControl): { [key: string]: any } => {
+        }]
+      }),
+      new TextElement({
+        key: 'confirmedNewPassword',
+        label: 'Confirm New Password',
+        required: true,
+        type: TextElementType.password,
+        validators: [(control: AbstractControl): { [key: string]: any } => {
           if (!control.parent) {
             return null;
           }
@@ -48,7 +53,8 @@ export class ChangePasswordDialogComponent implements OnInit {
           if (password && password.value && control.value && password.value !== control.value) {
             return { mismatchedPasswords: 'Passwords do not match' };
           }
-        }])
+        }]
+      })
     ];
   }
 

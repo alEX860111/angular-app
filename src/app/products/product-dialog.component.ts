@@ -25,15 +25,19 @@ export class ProductDialogComponent implements OnInit {
     this.title = this.data.title;
     this.product = this.data.product;
     this.elements = [
-      new TextElement('name')
-        .withLabel('Name')
-        .withRequired()
-        .withType(TextElementType.text)
-        .withValue(this.product.name),
-      new NumberElement('price')
-        .withLabel('Price')
-        .withRequired()
-        .withValue(this.product.price)
+      new TextElement({
+        key: 'name',
+        label: 'Name',
+        required: true,
+        type: TextElementType.text,
+        value: this.product.name
+      }),
+      new NumberElement({
+        key: 'price',
+        label: 'Price',
+        required: true,
+        value: this.product.price
+      })
     ];
   }
 

@@ -7,48 +7,20 @@ export enum TextElementType {
   password
 }
 
-export class TextElement implements FormElement<string> {
-
-  key: string;
-
-  label = '';
-  value = '';
-  required = false;
-  validators: ValidatorFn[] = [];
+export class TextElement extends FormElement<string> {
 
   type = 'text';
 
-  constructor(key: string) {
-    this.key = key;
-  }
-
-  get controlType() {
-    return 'Input';
-  }
-
-  withLabel(label: string) {
-    this.label = label;
-    return this;
-  }
-
-  withValue(value: string) {
-    this.value = value;
-    return this;
-  }
-
-  withRequired() {
-    this.required = true;
-    return this;
-  }
-
-  withValidators(validators: ValidatorFn[]) {
-    this.validators = validators;
-    return this;
-  }
-
-  withType(type: TextElementType) {
-    this.type = TextElementType[type];
-    return this;
+  constructor(config: {
+    key: string,
+    label?: string;
+    value?: string;
+    required?: boolean;
+    validators?: ValidatorFn[],
+    type?: TextElementType
+  }) {
+    super(Object.assign({ controlType: 'Input', value: ''}, config));
+    this.type = config.type === undefined ? TextElementType[TextElementType.text] : TextElementType[config.type];
   }
 
 }

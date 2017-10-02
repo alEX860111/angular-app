@@ -2,43 +2,19 @@ import { ValidatorFn } from '@angular/forms';
 
 import { FormElement } from './form-element';
 
-export class NumberElement implements FormElement<number> {
-
-  key: string;
-
-  label = '';
-  value = 0;
-  required = false;
-  validators: ValidatorFn[] = [];
+export class NumberElement extends FormElement<number> {
 
   type = 'number';
 
-  constructor(key: string) {
-    this.key = key;
-  }
-
-  get controlType() {
-    return 'Input';
-  }
-
-  withLabel(label: string) {
-    this.label = label;
-    return this;
-  }
-
-  withValue(value: number) {
-    this.value = value;
-    return this;
-  }
-
-  withRequired() {
-    this.required = true;
-    return this;
-  }
-
-  withValidators(validators: ValidatorFn[]) {
-    this.validators = validators;
-    return this;
+  constructor(config: {
+    key: string,
+    label?: string;
+    value?: number;
+    required?: boolean;
+    validators?: ValidatorFn[]
+  }) {
+    super(Object.assign({ controlType: 'Input', value: 0}, config));
+    this.type = 'number';
   }
 
 }

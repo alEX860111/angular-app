@@ -28,14 +28,18 @@ export class LoginComponent implements OnInit {
     }
 
     this.elements = [
-      new TextElement('username')
-        .withLabel('Username')
-        .withRequired()
-        .withType(TextElementType.text),
-      new TextElement('password')
-        .withLabel('Password')
-        .withRequired()
-        .withType(TextElementType.password)
+      new TextElement({
+        key: 'username',
+        label: 'Username',
+        required: true,
+        type: TextElementType.text
+      }),
+      new TextElement({
+        key: 'password',
+        label: 'Password',
+        required: true,
+        type: TextElementType.password
+      })
     ];
   }
 
