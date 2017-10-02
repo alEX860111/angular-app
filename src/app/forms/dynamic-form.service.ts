@@ -10,12 +10,17 @@ export class DynamicFormService {
     const group = {};
 
     elements.forEach(element => {
-      if (element.required) {
-        element.validators.push(Validators.required);
+      if (group.hasOwnProperty(element.key)) {
+        throw new Error(`form configuration error: found duplicate key '${element.key}'`);
       }
-      group[element.key] = new FormControl(element.value, element.validators);
+      group[element.key] = this.toFormControl(element);
     });
 
     return new FormGroup(group);
+  }
+
+  private toFormControl(element: FormElement<any>) {
+    const validators = element.required ? element.validators.concat([Validators.required]) : element.validators;
+    return new FormControl(element.value, validators);
   }
 }
