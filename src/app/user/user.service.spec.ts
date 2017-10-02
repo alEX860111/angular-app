@@ -22,7 +22,7 @@ describe('UserService', () => {
 
     it('success', () => {
       http.put.and.returnValue(Observable.of({}));
-      const expectedUrl = 'http://localhost:8080/users/123abc';
+      const expectedUrl = '/api/users/123abc';
 
       const changePasswordRequest = new ChangePasswordRequest();
       const userId = '123abc';
@@ -42,7 +42,7 @@ describe('UserService', () => {
       const expectedError = new Error();
       http.put.and.returnValue(Observable.throw(expectedError));
 
-      const expectedUrl = 'http://localhost:8080/users/123abc';
+      const expectedUrl = '/api/users/123abc';
 
       const changePasswordRequest = new ChangePasswordRequest();
       const userId = '123abc';

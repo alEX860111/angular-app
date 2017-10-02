@@ -25,7 +25,7 @@ describe('ProductService', function () {
   });
 
   it('getProducts', () => {
-    const expectedUrl = 'http://localhost:8080/products?page=1&perpage=10&sortkey=name&sortorder=asc';
+    const expectedUrl = '/api/products?page=1&perpage=10&sortkey=name&sortorder=asc';
 
     const productContainer = new ItemContainer<Product>();
     result.json.and.returnValue(productContainer);
@@ -39,7 +39,7 @@ describe('ProductService', function () {
   });
 
   it('deleteProduct', () => {
-    const expectedUrl = 'http://localhost:8080/products/123abc';
+    const expectedUrl = '/api/products/123abc';
 
     const productId = '123abc';
 
@@ -52,7 +52,7 @@ describe('ProductService', function () {
   });
 
   it('addProduct', () => {
-    const expectedUrl = 'http://localhost:8080/products';
+    const expectedUrl = '/api/products';
 
     const productToAdd = new Product();
 
@@ -75,7 +75,7 @@ describe('ProductService', function () {
   });
 
   it('editProduct', () => {
-    const expectedUrl = 'http://localhost:8080/products/123abc';
+    const expectedUrl = '/api/products/123abc';
 
     const productToEdit = new Product();
     productToEdit._id = '123abc';
