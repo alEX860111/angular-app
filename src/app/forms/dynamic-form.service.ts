@@ -5,10 +5,9 @@ import { FormElement } from './form-element';
 
 @Injectable()
 export class DynamicFormService {
-  constructor() { }
 
   toFormGroup(elements: FormElement<any>[]) {
-    const group: any = {};
+    const group = {};
 
     elements.forEach(element => {
       if (element.required) {
