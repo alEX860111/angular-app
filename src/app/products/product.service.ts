@@ -13,7 +13,7 @@ import { LogService } from '../core/log.service';
 @Injectable()
 export class ProductService {
 
-  private API_URL = 'http://localhost:8080/products';
+  private API_URL = '/api/products';
 
   constructor(private http: AuthHttp, private logService: LogService) { }
 

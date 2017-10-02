@@ -11,7 +11,7 @@ import { LogService } from '../core/log.service';
 @Injectable()
 export class LoginService {
 
-  private API_URL = 'http://localhost:8080/login';
+  private API_URL = '/api/login';
 
   constructor(
     private http: Http,
