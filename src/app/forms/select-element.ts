@@ -1,5 +1,6 @@
-import { FormElement } from './form-element';
 import { ValidatorFn } from '@angular/forms';
+
+import { FormElement, ControlType } from './form-element';
 
 interface Option {
   value: string;
@@ -18,7 +19,7 @@ export class SelectElement extends FormElement<string> {
     validators?: ValidatorFn[],
     options: Option[]
   }) {
-    super(Object.assign({ controlType: 'Select', value: ''}, config));
+    super(Object.assign({ controlType: ControlType.Select, value: ''}, config));
     this.options = config.options;
   }
 

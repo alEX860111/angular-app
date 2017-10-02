@@ -1,6 +1,6 @@
 import { ValidatorFn } from '@angular/forms';
 
-import { FormElement } from './form-element';
+import { FormElement, ControlType } from './form-element';
 
 export class NumberElement extends FormElement<number> {
 
@@ -13,7 +13,7 @@ export class NumberElement extends FormElement<number> {
     required?: boolean;
     validators?: ValidatorFn[]
   }) {
-    super(Object.assign({ controlType: 'Input', value: 0}, config));
+    super(Object.assign({ controlType: ControlType.Input, value: 0}, config));
     this.type = 'number';
   }
 

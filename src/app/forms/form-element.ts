@@ -1,5 +1,10 @@
 import { ValidatorFn } from '@angular/forms';
 
+export enum ControlType {
+  Input,
+  Select
+}
+
 export class FormElement<T> {
   controlType: string;
   key: string;
@@ -9,14 +14,14 @@ export class FormElement<T> {
   validators: ValidatorFn[];
 
   constructor(config: {
-    controlType: string
+    controlType: ControlType
     key: string,
     label?: string;
     value: T;
     required?: boolean;
     validators?: ValidatorFn[],
   }) {
-    this.controlType = config.controlType;
+    this.controlType = ControlType[config.controlType];
     this.key = config.key;
     this.label = config.label === undefined ? '' : config.label;
     this.value = config.value;

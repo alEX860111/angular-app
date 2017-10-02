@@ -1,6 +1,6 @@
 import { ValidatorFn } from '@angular/forms';
 
-import { FormElement } from './form-element';
+import { FormElement, ControlType } from './form-element';
 
 export enum TextElementType {
   text,
@@ -19,7 +19,7 @@ export class TextElement extends FormElement<string> {
     validators?: ValidatorFn[],
     type?: TextElementType
   }) {
-    super(Object.assign({ controlType: 'Input', value: ''}, config));
+    super(Object.assign({ controlType: ControlType.Input, value: ''}, config));
     this.type = config.type === undefined ? TextElementType[TextElementType.text] : TextElementType[config.type];
   }
 
