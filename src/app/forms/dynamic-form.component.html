@@ -3,7 +3,7 @@
     <app-dynamic-form-element [element]="element" [form]="form"></app-dynamic-form-element>
   </div>
   <div class="form-controls">
-    <button *ngIf="showAbort" mat-button (click)="onAbort()">Abort</button>
+    <button type="button" *ngIf="showAbort" mat-button (click)="onAbort()">Abort</button>
     <button mat-button color="primary" mat-button [disabled]="!form.valid" type="submit">Submit</button>
   </div>
 </form>
